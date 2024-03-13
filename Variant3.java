@@ -44,5 +44,14 @@ public class Variant3 {
             double average = (double) sumMap.get(key) / countMap.get(key);
             result.add(new Pair<>(key, average));
         }
+        for (int i = 0; i < result.size() - 1; i++) {
+            for (int j = 0; j < result.size() - i - 1; j++) {
+                if (result.get(j).value < result.get(j + 1).value) {
+                    Pair<String, Double> temp = result.get(j);
+                    result.set(j, result.get(j + 1));
+                    result.set(j + 1, temp);
+                }
+            }
+        }
 }
 }
