@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -36,6 +38,11 @@ public class Variant3 {
             } else {
                 System.err.println("Invalid line format: " + line);
             }
+        }
+                List<Pair<String, Double>> result = new ArrayList<>();
+        for (String key : sumMap.keySet()) {
+            double average = (double) sumMap.get(key) / countMap.get(key);
+            result.add(new Pair<>(key, average));
         }
 }
 }
