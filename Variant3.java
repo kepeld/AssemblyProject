@@ -21,6 +21,9 @@ public class Variant3 {
 
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
+            if ("STOP".equals(line)) {
+                break;
+            }
             String[] parts = line.split("\\s+", 2);
             if (parts.length == 2) {
                 String key = parts[0];
@@ -52,6 +55,9 @@ public class Variant3 {
                     result.set(j + 1, temp);
                 }
             }
+        }
+        for (Pair<String, Double> pair : result) {
+            System.out.println(pair.key);
         }
 }
 }
