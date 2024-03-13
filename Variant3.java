@@ -16,4 +16,10 @@ public class Variant3 {
         Scanner scanner = new Scanner(System.in);
         Map<String, Integer> sumMap = new HashMap<>();
         Map<String, Integer> countMap = new HashMap<>();
+
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] parts = line.split("\\s+", 2);
+}
+}
 }
