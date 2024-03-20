@@ -59,5 +59,6 @@ public class Variant3 {
         for (Pair<String, Double> pair : result) {
             System.out.println(pair.key);
         }
+        scanner.close();
 }
 }
