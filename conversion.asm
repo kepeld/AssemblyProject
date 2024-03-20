@@ -23,3 +23,10 @@ calculate_loop:
     add ax, cx             ; Додавання поточної цифри
     inc si                 ; Перехід до наступного символу
     jmp calculate_loop     ; Повторення циклу
+
+    calculate_done:
+    mov [result], ax       ; Зберігання результату
+    mov ax, 4C00h          ; Повернення до DOS
+    int 21h
+
+END start
