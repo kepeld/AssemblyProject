@@ -7,3 +7,13 @@ data ends
 ; Код програми
 code segment
     assume cs:code, ds:data
+
+    start:
+    mov ax, data
+    mov ds, ax ; Встановлюємо сегмент даних
+
+    xor dx, dx ; Очищаємо старший регістр DX
+    mov ax, 0  ; Очищаємо регістр AX для накопичення суми
+
+    mov cx, [count] ; Завантажуємо кількість чисел у лічильник CX
+    mov bx, 0       ; Використовуємо BX для індексації масиву
