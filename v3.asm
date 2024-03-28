@@ -68,3 +68,34 @@ endReadKey:
     
     xor ax, ax
     mov bx, 10
+
+    readValueLoop:
+    mov cl, [si]
+    cmp cl, 0
+    je endReadValue
+    cmp cl, ' '
+    je endReadValue
+    cmp cl, '0'
+    jb invalidInput
+    cmp cl, '9'
+    ja invalidInput
+    sub cl, '0'
+    push ax
+    mul bx
+    pop cx
+    add ax, cx
+    inc si
+    jmp readValueLoop
+
+endReadValue:
+    cmp ax, -10000
+    jl invalidInput
+    cmp ax, 10000
+    jg invalidInput
+
+    mov word ptr [valueBuffer], ax
+
+    mov si, offset keyBuffer
+    mov di, offset keyOccurrences
+    mov cx, maxKeys
+    mov bx, 0
