@@ -12,3 +12,20 @@
     keyAverages dw 100 dup(0)
     maxKeys equ 100
     
+    .CODE
+main PROC
+    mov ax, @data
+    mov ds, ax
+    
+readLine:
+    mov ah, 0Ah
+    lea dx, lineReadBuffer
+    mov byte ptr [lineReadBuffer], maxLineLength
+    int 21h
+    
+    cmp byte ptr [lineReadBuffer+1], 0
+    jne processLine
+    jmp finalize
+        cmp [lineCounter], maxLines
+    jne continue
+    jmp finalize
