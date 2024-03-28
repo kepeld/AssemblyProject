@@ -130,3 +130,39 @@ invalidInput:
     mov ah, 09h
     int 21h
     jmp readLine
+
+    finalize:
+    call calculateAverages
+    call sortKeys
+    call printSortedKeys
+    
+    mov ah, 09h
+    int 21h
+        
+finish:
+    mov ax, 4C00h
+    int 21h
+        
+calculateAverages PROC
+    mov si, offset keyOccurrences
+    mov di, offset keySums
+    mov bx, offset keyAverages
+    mov cx, maxKeys
+    
+calculateLoop:
+    cmp word ptr [si], 0
+    je skipCalculate
+        
+    mov ax, [di]
+    mov dx, [di+2]
+    div word ptr [si]
+    mov [bx], ax
+        
+skipCalculate:
+    add si, 2
+    add di, 4
+    add bx, 2
+    loop calculateLoop
+    
+    ret
+calculateAverages ENDP
