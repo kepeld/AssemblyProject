@@ -200,3 +200,34 @@ skipSwap:
     
     ret
 sortKeys ENDP
+
+swapKeys PROC
+    push bp
+    mov bp, sp
+    push ax
+    push bx
+    push cx
+    push si
+    push di
+    
+    mov si, [bp+8]
+    mov di, [bp+8]
+    add di, 16
+    mov cx, 8
+    
+swapLoop:
+    mov ax, [si]
+    xchg ax, [di]
+    mov [si], ax
+    add si, 2
+    add di, 2
+    loop swapLoop
+    
+    pop di
+    pop si
+    pop cx
+    pop bx
+    pop ax
+    pop bp
+    ret 4
+swapKeys ENDP
