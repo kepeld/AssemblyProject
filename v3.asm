@@ -45,3 +45,26 @@ skipRemoveNewline:
     cmp [lineCounter], maxLines
     jne continue
     jmp finalize
+
+    continue:
+    mov si, offset lineReadBuffer+2
+    mov di, offset keyBuffer
+    mov bx, 0
+readKey:
+    lodsb
+    cmp al, ' '
+    je endReadKey
+    cmp al, 0
+    je endReadKey
+    stosb
+    inc bx
+    cmp bx, 16
+    jb readKey
+endReadKey:
+    mov al, 0
+    stosb
+    
+    inc si
+    
+    xor ax, ax
+    mov bx, 10
