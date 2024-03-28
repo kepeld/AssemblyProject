@@ -99,3 +99,34 @@ endReadValue:
     mov di, offset keyOccurrences
     mov cx, maxKeys
     mov bx, 0
+
+    findKeyIndex:
+    push si
+    push di
+    mov ax, si
+    repe cmpsb
+    je foundKeyIndex
+    pop di
+    pop si
+    add di, 2
+    inc bx
+    loop findKeyIndex
+foundKeyIndex:
+    pop di
+    pop si
+        
+    add word ptr [di], 1
+    mov di, offset keySums
+    mov ax, bx
+    mov cx, 4
+    mul cx
+    add di, ax
+    add [di], dx
+        
+    inc [lineCounter]
+    jmp readLine
+        
+invalidInput:
+    mov ah, 09h
+    int 21h
+    jmp readLine
