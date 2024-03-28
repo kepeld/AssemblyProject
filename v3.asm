@@ -29,3 +29,19 @@ readLine:
         cmp [lineCounter], maxLines
     jne continue
     jmp finalize
+
+    processLine:
+    lea si, lineReadBuffer+2
+    mov di, si
+    mov cl, [lineReadBuffer+1]
+    mov ch, 0
+    add si, cx
+    dec si
+    cmp byte ptr [si], 0Dh
+    jne skipRemoveNewline
+    mov byte ptr [si], 0
+skipRemoveNewline:
+
+    cmp [lineCounter], maxLines
+    jne continue
+    jmp finalize
