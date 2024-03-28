@@ -166,3 +166,37 @@ skipCalculate:
     
     ret
 calculateAverages ENDP
+
+sortKeys PROC
+    mov cx, maxKeys - 1
+    
+outerLoop:
+    push cx
+    mov bx, offset keyBuffer
+    mov si, offset keyAverages
+        
+innerLoop:
+    mov ax, [si]
+    cmp ax, [si+2]
+    jge skipSwap
+            
+    push bx
+    push si
+    call swapKeys
+    pop si
+    pop bx
+            
+    mov dx, [si]
+    xchg dx, [si+2]
+    mov [si], dx
+            
+skipSwap:
+    add bx, 16
+    add si, 2
+    loop innerLoop
+        
+    pop cx
+    loop outerLoop
+    
+    ret
+sortKeys ENDP
