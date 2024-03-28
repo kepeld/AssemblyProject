@@ -231,3 +231,31 @@ swapLoop:
     pop bp
     ret 4
 swapKeys ENDP
+
+printSortedKeys PROC
+    mov si, offset keyBuffer
+    mov cx, maxKeys
+    
+printLoop:
+    cmp byte ptr [si], 0
+    je skipPrint
+        
+    mov ah, 09h
+    mov dx, si
+    int 21h
+        
+    mov ah, 02h
+    mov dl, 0Dh
+    int 21h
+    mov dl, 0Ah
+    int 21h
+        
+skipPrint:
+    add si, 16
+    loop printLoop
+    
+    ret
+printSortedKeys ENDP
+
+main ENDP
+END main
