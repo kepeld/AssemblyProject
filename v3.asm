@@ -1,7 +1,7 @@
 .MODEL small
 .STACK 100h
 .DATA
-    lineCounter dw 0
+    lineCounter dw 0 
     maxLines equ 10000
     maxLineLength equ 255
     lineReadBuffer db maxLineLength+1 dup(?)
@@ -64,8 +64,6 @@ endReadKey:
     mov al, 0
     stosb
     
-    inc si
-    
     xor ax, ax
     mov bx, 10
 
@@ -76,14 +74,16 @@ endReadKey:
     cmp cl, ' '
     je endReadValue
     cmp cl, '0'
-    jb invalidInput
+    jb endReadValue
     cmp cl, '9'
     ja invalidInput
     sub cl, '0'
-    push ax
-    mul bx
-    pop cx
-    add ax, cx
+    mov dx, ax
+    shl ax, 1
+    shl ax, 1
+    add ax, dx
+    shl ax, 1
+    add al, cl
     inc si
     jmp readValueLoop
 
