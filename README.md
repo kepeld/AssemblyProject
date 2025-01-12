@@ -1,4 +1,4 @@
-# Project2
+# AssemblyProject
 
 **Author:** Andrii Kozin  
 **Variant:** 3
